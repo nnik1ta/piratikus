@@ -25,7 +25,12 @@ public class PlayerMovement : MonoBehaviour
     public Text TextCoins;
     public AudioSource Eat;
     public Canvas vih;
-    
+   
+
+
+    private GameObject player;
+
+
 
 
 
@@ -37,15 +42,17 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         SY = transform.position.y;
         SX = transform.position.x;
+        
     }
     private void flip()
     {
         FacingRight = !FacingRight;
         Vector3 tscale = transform.localScale;
-        tscale.x = tscale.x * (-5);
+        tscale.x = tscale.x * (-1);
         transform.localScale = tscale;
 
     }
+    
     void Update()
     {
         horizontalMove = Input.GetAxis("Horizontal") * runSpeed;
@@ -58,14 +65,14 @@ public class PlayerMovement : MonoBehaviour
             Jumping.Play();
             
         }
-        if (isGround == false)
+        /*if (isGround == false)
         {
             animator.SetBool("Isjump", true);
         }
         else
         {
             animator.SetBool("Isjump", false);
-        }
+        }*/
 
         if (horizontalMove < 0 && FacingRight)
         {
@@ -85,8 +92,9 @@ public class PlayerMovement : MonoBehaviour
         {
             vih.enabled = false;
         }
+       
 
-        
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -143,20 +151,20 @@ public class PlayerMovement : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "lestnica")
+        /*if (collision.gameObject.tag == "lestnica")
         {
             animator.SetBool("IsClimb", false);
-        }
+        }*/
 
 
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "lestnica")
+        /*if (collision.gameObject.tag == "lestnica")
         {
             animator.SetBool("IsClimb", true);
         }
-
+*/
     }
 }

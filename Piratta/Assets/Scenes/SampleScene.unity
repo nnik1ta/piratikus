@@ -3873,7 +3873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   FacingRight: 1
-  jumpForce: 20
+  jumpForce: 25
   runSpeed: 0.87
   isGround: 0
   checkGroundOffSetY: -0.71
