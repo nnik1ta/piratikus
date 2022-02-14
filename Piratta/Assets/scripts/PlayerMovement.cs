@@ -25,14 +25,6 @@ public class PlayerMovement : MonoBehaviour
     public Text TextCoins;
     public AudioSource Eat;
     public Canvas vih;
-   
-
-
-    private GameObject player;
-
-
-
-
 
 
      public float horizontalMove = 0f;
@@ -108,13 +100,7 @@ public class PlayerMovement : MonoBehaviour
             SceneManager.LoadScene("Level2");
         }
        
-        if (collision.gameObject.tag == "money")
-        {
-            gem++;
-            Destroy(collision.gameObject);
-            TextCoins.text = gem.ToString();
-
-        }
+       
 
         if (collision.gameObject.tag == "cherry")
         {
@@ -147,8 +133,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-    
-    
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "money")
+        {
+            gem++;
+            Destroy(collision.gameObject);
+            TextCoins.text = gem.ToString();
+
+        }
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         /*if (collision.gameObject.tag == "lestnica")
