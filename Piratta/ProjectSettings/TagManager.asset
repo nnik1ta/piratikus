@@ -6,6 +6,8 @@ TagManager:
   tags:
   - DeadZone
   - money
+  - bullet
+  - ground
   layers:
   - Default
   - TransparentFX

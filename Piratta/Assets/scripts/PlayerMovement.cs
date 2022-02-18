@@ -27,7 +27,10 @@ public class PlayerMovement : MonoBehaviour
     public Canvas vih;
 
 
-     public float horizontalMove = 0f;
+
+
+
+    public float horizontalMove = 0f;
     float SX, SY;
     void Start()
     {
@@ -36,13 +39,13 @@ public class PlayerMovement : MonoBehaviour
         SX = transform.position.x;
         
     }
-    private void flip()
+    public void flip()
     {
         FacingRight = !FacingRight;
         Vector3 tscale = transform.localScale;
         tscale.x = tscale.x * (-1);
         transform.localScale = tscale;
-
+        
     }
     
     void Update()
@@ -69,20 +72,22 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalMove < 0 && FacingRight)
         {
             flip();
+            /*bulka.velocity = new Vector2(4,0);*/
 
         }
         else if (horizontalMove > 0 && !FacingRight)
         {
             flip();
+            /*bulka.velocity = new Vector2(-4, 0);*/
         }
         
         if (Input.GetKey(KeyCode.Escape))
         {
-            vih.enabled = true;
+            /*vih.enabled = true;*/
         }
         else
         {
-            vih.enabled = false;
+            /*vih.enabled = false;*/
         }
        
 
