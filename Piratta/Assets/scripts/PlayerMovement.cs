@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalMove = Input.GetAxis("Horizontal") * runSpeed;
 
-       /* animator.SetFloat("speed", Mathf.Abs(horizontalMove));*/
+        /*animator.SetFloat("speed", Mathf.Abs(horizontalMove));*/
         if (isGround && Input.GetKeyDown(KeyCode.Space))
         {
             
@@ -60,14 +60,7 @@ public class PlayerMovement : MonoBehaviour
             Jumping.Play();
             
         }
-        /*if (isGround == false)
-        {
-            animator.SetBool("Isjump", true);
-        }
-        else
-        {
-            animator.SetBool("Isjump", false);
-        }*/
+        
 
         if (horizontalMove < 0 && FacingRight)
         {
@@ -89,7 +82,22 @@ public class PlayerMovement : MonoBehaviour
         {
             /*vih.enabled = false;*/
         }
-       
+        if (isGround == false)
+        {
+            animator.SetBool("IsJump", true);
+        }
+        else
+        {
+            animator.SetBool("IsJump", false);
+        }
+        if (horizontalMove > 0)
+        {
+            animator.SetBool("IsRuning",true); 
+        }
+        else if(horizontalMove < 0)
+        {
+            animator.SetBool("IsRuning", true);
+        }
 
 
     }
