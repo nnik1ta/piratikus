@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public Text TextCoins;
     public AudioSource Eat;
     public Canvas vih;
+    
 
 
 
