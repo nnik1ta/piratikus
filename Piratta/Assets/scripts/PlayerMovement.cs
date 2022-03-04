@@ -43,9 +43,7 @@ public class PlayerMovement : MonoBehaviour
     public void flip()
     {
         FacingRight = !FacingRight;
-        Vector3 tscale = transform.localScale;
-        tscale.x = tscale.x * (-1);
-        transform.localScale = tscale;
+        transform.Rotate(0f,180f,0f);
         
     }
     
