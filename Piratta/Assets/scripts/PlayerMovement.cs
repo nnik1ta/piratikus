@@ -150,10 +150,7 @@ public class PlayerMovement : MonoBehaviour
         {
             IsCeiling = true;
         }
-        if (collision.gameObject.tag == "enemy")
-        {
-            Destroy(gameObject);
-        }
+        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {

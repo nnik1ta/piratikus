@@ -20,16 +20,22 @@ public class EnemyMove : MonoBehaviour
         if (transform.position == pos1.position)
         {
             nextPos = pos2.position;
-            transform.localScale = new Vector2(-1, 1);
+            transform.localScale = new Vector2(1, 1);
         }
         if (transform.position == pos2.position)
         {
             nextPos = pos1.position;
-            transform.localScale = new Vector2(1, 1);
+            transform.localScale = new Vector2(-1, 1);
         }
-
+       
     }
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 
 
 
