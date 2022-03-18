@@ -25,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     public Text TextCoins;
     public AudioSource Eat;
     public Canvas vih;
+    public bool IsCeiling;
+    public bool IsCrouch;
+   
     
 
 
@@ -81,19 +84,21 @@ public class PlayerMovement : MonoBehaviour
         {
             /*vih.enabled = false;*/
         }
-        if (isGround == false)
+        if(isGround && Input.GetKey(KeyCode.LeftControl) || IsCeiling == true)
         {
-            animator.SetBool("IsJump", true);
+            
+            /*animator.SetBool("IsCrouch", true);*/
+            GetComponent<BoxCollider2D>().enabled = false;
+            IsCrouch = true;
         }
-        else
+        else if (IsCeiling == false)
         {
-            animator.SetBool("IsJump", false);
+            /*animator.SetBool("IsCrouch", false);*/
+            GetComponent<BoxCollider2D>().enabled = true;
+            IsCrouch = false;
         }
         
         
-
-
-
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -106,19 +111,12 @@ public class PlayerMovement : MonoBehaviour
         {
             SceneManager.LoadScene("Level2");
         }
-       
-       
-
         if (collision.gameObject.tag == "cherry")
         {
             Eat.Play();
 
         }
-
-
     }
-
-   
     void FixedUpdate()
     {
 
@@ -138,9 +136,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isGround = false;
         }
-
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "money")
@@ -150,6 +146,14 @@ public class PlayerMovement : MonoBehaviour
             TextCoins.text = gem.ToString();
 
         }
+        if (collision.gameObject.tag == "ground")
+        {
+            IsCeiling = true;
+        }
+        if (collision.gameObject.tag == "enemy")
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -157,8 +161,11 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsClimb", false);
         }*/
-
-
+        if(collision.gameObject.tag == "ground")
+        {
+            IsCeiling = false;
+        }
+       
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

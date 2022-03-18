@@ -8,6 +8,7 @@ TagManager:
   - money
   - bullet
   - ground
+  - enemy
   layers:
   - Default
   - TransparentFX
