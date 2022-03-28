@@ -27,7 +27,9 @@ public class PlayerMovement : MonoBehaviour
     public Canvas vih;
     public bool IsCeiling;
     public bool IsCrouch;
-   
+    private int seconds = 2;
+    private bool beba;
+    
     
 
 
@@ -36,13 +38,16 @@ public class PlayerMovement : MonoBehaviour
 
     public float horizontalMove = 0f;
     float SX, SY;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         SY = transform.position.y;
         SX = transform.position.x;
-        
+       
+       
     }
+    
     public void flip()
     {
         FacingRight = !FacingRight;
@@ -51,9 +56,10 @@ public class PlayerMovement : MonoBehaviour
     }
     
     void Update()
-    {
-        horizontalMove = Input.GetAxis("Horizontal") * runSpeed;
 
+    {
+
+        horizontalMove = Input.GetAxis("Horizontal") * runSpeed;
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
         if (isGround && Input.GetKeyDown(KeyCode.Space))
         {
@@ -86,19 +92,42 @@ public class PlayerMovement : MonoBehaviour
         }
         if(isGround && Input.GetKey(KeyCode.LeftControl) || IsCeiling == true)
         {
-            
-            /*animator.SetBool("IsCrouch", true);*/
+            runSpeed = 0.4f;
+            animator.SetBool("IsCrouch", true);
             GetComponent<BoxCollider2D>().enabled = false;
             IsCrouch = true;
         }
         else if (IsCeiling == false)
         {
-            /*animator.SetBool("IsCrouch", false);*/
+            runSpeed = 0.87f;
+            animator.SetBool("IsCrouch", false);
             GetComponent<BoxCollider2D>().enabled = true;
             IsCrouch = false;
         }
-        
-        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            animator.SetBool("IsJump", true);
+        }
+        if (isGround && Input.GetKey(KeyCode.Space ))
+        {
+            animator.SetBool("IsJump", true);
+        }
+        else
+        {
+            animator.SetBool("IsJump", false);
+        }
+        if (beba == true)
+        {
+            
+            jumpForce = 0f;
+        }
+        else if (beba == false)
+        {
+           
+            jumpForce = 25f;
+        }
+
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -116,6 +145,11 @@ public class PlayerMovement : MonoBehaviour
             Eat.Play();
 
         }
+        if (collision.gameObject.tag == "enemy")
+        {
+           /* StartCoroutine(Invunerability());*/
+        }
+
     }
     void FixedUpdate()
     {
@@ -173,4 +207,13 @@ public class PlayerMovement : MonoBehaviour
         }
 */
     }
+    /*private IEnumerator Invunerability()
+    {
+        beba = true;
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+        yield return new WaitForSeconds(3);
+        GetComponent<Rigidbody2D>().gravityScale = 4;
+        beba = false;
+    } */
+    
 }
