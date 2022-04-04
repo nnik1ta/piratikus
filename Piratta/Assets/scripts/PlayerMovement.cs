@@ -51,14 +51,12 @@ public class PlayerMovement : MonoBehaviour
     public void flip()
     {
         FacingRight = !FacingRight;
-        transform.Rotate(0f,180f,0f);
-        
+        transform.Rotate(0f,180f,0f);   
     }
     
     void Update()
 
     {
-
         horizontalMove = Input.GetAxis("Horizontal") * runSpeed;
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
         if (isGround && Input.GetKeyDown(KeyCode.Space))
@@ -68,8 +66,6 @@ public class PlayerMovement : MonoBehaviour
             Jumping.Play();
             
         }
-        
-
         if (horizontalMove < 0 && FacingRight)
         {
             flip();
@@ -108,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsJump", true);
         }
-        if (isGround && Input.GetKey(KeyCode.Space ))
+        if (!isGround)
         {
             animator.SetBool("IsJump", true);
         }
@@ -118,16 +114,12 @@ public class PlayerMovement : MonoBehaviour
         }
         if (beba == true)
         {
-            
             jumpForce = 0f;
         }
         else if (beba == false)
         {
-           
             jumpForce = 25f;
         }
-
-
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -136,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
             Death.Play();
             transform.position = new Vector3(SY, SX, transform.position.z);
         }
+        
         if (collision.gameObject.name == "NextLevel")
         {
             SceneManager.LoadScene("Level2");
@@ -147,13 +140,17 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.tag == "enemy")
         {
+            animator.SetBool("IsHit", true);
            /* StartCoroutine(Invunerability());*/
+           
+        }  
+        else
+        {
+            animator.SetBool("IsHit", false);
         }
-
     }
     void FixedUpdate()
     {
-
         Vector2 targetVelocity = new Vector2(horizontalMove * 10f, rb.velocity.y);
         rb.velocity = targetVelocity;
         CheckGround();
@@ -178,21 +175,26 @@ public class PlayerMovement : MonoBehaviour
             gem++;
             Destroy(collision.gameObject);
             TextCoins.text = gem.ToString();
-
         }
         if (collision.gameObject.tag == "ground")
         {
             IsCeiling = true;
         }
-        
+        if (collision.gameObject.tag == "checkpoint")
+        {
+            SY = transform.position.y;
+            SX = transform.position.x;
+            Destroy(collision.gameObject);
+
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        /*if (collision.gameObject.tag == "lestnica")
+        if (collision.gameObject.tag == "lestnica")
         {
             animator.SetBool("IsClimb", false);
-        }*/
-        if(collision.gameObject.tag == "ground")
+        }
+        if (collision.gameObject.tag == "ground")
         {
             IsCeiling = false;
         }
@@ -200,20 +202,18 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-
-        /*if (collision.gameObject.tag == "lestnica")
+        if (collision.gameObject.tag == "lestnica")
         {
             animator.SetBool("IsClimb", true);
         }
-*/
     }
-    /*private IEnumerator Invunerability()
+    private IEnumerator Invunerability()
     {
         beba = true;
         GetComponent<Rigidbody2D>().gravityScale = 0;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         GetComponent<Rigidbody2D>().gravityScale = 4;
         beba = false;
-    } */
-    
+    }
+
 }
