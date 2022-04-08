@@ -10,11 +10,12 @@ TagManager:
   - ground
   - enemy
   - checkpoint
+  - weapon
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - weapon
   - Water
   - UI
   - 
