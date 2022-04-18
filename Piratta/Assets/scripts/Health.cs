@@ -75,14 +75,7 @@ public class Health : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        /*if (collision.gameObject.tag == "enemy")
-        {
-         animator.SetBool("IsHit",true);
-        }
-        else
-        {
-         animator.SetBool("IsHit",false);
-        }*/
+        
     }
 
 

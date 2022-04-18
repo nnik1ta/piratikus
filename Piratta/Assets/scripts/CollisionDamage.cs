@@ -10,10 +10,8 @@ public class CollisionDamage : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Health health = collision.gameObject.GetComponent<Health>();
-        health.TakeHit(collisionDamage);
-        
+       /* Health health = collision.gameObject.GetComponent<Health>();
+        health.TakeHit(collisionDamage);*/
 
-
-}
+    }
 }

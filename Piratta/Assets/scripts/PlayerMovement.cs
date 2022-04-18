@@ -141,12 +141,16 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "enemy")
         {
             animator.SetBool("IsHit", true);
-           /* StartCoroutine(Invunerability());*/
-           
+            /*StartCoroutine(Invunerability());*/
         }  
         else
         {
             animator.SetBool("IsHit", false);
+        }
+        if (collision.gameObject.tag == "enemy")
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene("GameOver");
         }
     }
     void FixedUpdate()

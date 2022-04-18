@@ -13,28 +13,31 @@ public class weaponHold : MonoBehaviour
     {
         
     }
-
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (!hold)
             {
+
                 Physics2D.queriesStartInColliders = false;
                 hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance);
                 if (hit.collider != null && hit.collider.tag == "weapon") 
                 {
                     hold = true;
                 }
-
+               
             }
             else
             {
                 hold = false;
-                if (hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
+                if (hit.collider.gameObject.GetComponent<Rigidbody2D>() != null && holdPoint.position.x > transform.position.x)
                 {
                     hit.collider.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x, 1) * throwObject;
+                }
+                else if (hit.collider.gameObject.GetComponent<Rigidbody2D>() != null && holdPoint.position.x < transform.position.x)
+                {
+                    hit.collider.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x, 1) * -throwObject;
                 }
             }
         }
@@ -48,10 +51,9 @@ public class weaponHold : MonoBehaviour
             }
             else if (holdPoint.position.x < transform.position.x && hold == true)
             {
-                hit.collider.gameObject.transform.localScale = new Vector2(transform.localScale.x + -1, transform.localScale.y * 1);
+                hit.collider.gameObject.transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y * 1);
             }
         }
-
     }
     private void OnDrawGizmos()
     {
@@ -59,11 +61,12 @@ public class weaponHold : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + Vector3.right * transform.localScale.normalized.x * distance);
     }
 
-
-
-
-
-
-
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "enemy" && gameObject.name == "Sword")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }
