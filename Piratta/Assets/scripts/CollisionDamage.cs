@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class CollisionDamage : MonoBehaviour
 {
-   
-    public float collisionDamage = 0.1f;
-    public string collisionTag;
-
+    private float collisionDamage;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       /* Health health = collision.gameObject.GetComponent<Health>();
-        health.TakeHit(collisionDamage);*/
-
+        if (collision.gameObject.tag == "Player")
+        {
+         
+          collision.GetComponent<Health>().TakeDamage(collisionDamage);
+        }
     }
 }

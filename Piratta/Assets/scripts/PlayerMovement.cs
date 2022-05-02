@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsCrouch;
     private int seconds = 2;
     private bool beba;
-    
+    private Vector3 respawnPoint;
     
 
 
@@ -37,13 +37,10 @@ public class PlayerMovement : MonoBehaviour
 
 
     public float horizontalMove = 0f;
-    float SX, SY;
-    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        SY = transform.position.y;
-        SX = transform.position.x;
+        respawnPoint = transform.position;
        
        
     }
@@ -123,12 +120,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "DeadZone")
+        if (collision.gameObject.tag == "DeadZone")
         {
             Death.Play();
-            transform.position = new Vector3(SY, SX, transform.position.z);
+            transform.position = respawnPoint;
         }
-        
+
         if (collision.gameObject.name == "NextLevel")
         {
             SceneManager.LoadScene("Level2");
@@ -147,11 +144,11 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsHit", false);
         }
-        if (collision.gameObject.tag == "enemy")
+        /*if (collision.gameObject.tag == "enemy")
         {
             Destroy(gameObject);
             SceneManager.LoadScene("GameOver");
-        }
+        }*/
     }
     void FixedUpdate()
     {
@@ -184,10 +181,10 @@ public class PlayerMovement : MonoBehaviour
         {
             IsCeiling = true;
         }
+
         if (collision.gameObject.tag == "checkpoint")
         {
-            SY = transform.position.y;
-            SX = transform.position.x;
+            respawnPoint = transform.position;
             Destroy(collision.gameObject);
 
         }
@@ -206,6 +203,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+
         if (collision.gameObject.tag == "lestnica")
         {
             animator.SetBool("IsClimb", true);

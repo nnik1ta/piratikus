@@ -13,7 +13,7 @@ public class CHER : MonoBehaviour
     {
       
       Health health = collision.gameObject.GetComponent<Health>();
-      health.GetHeal(collisionHeal);
+     /* health.GetHeal(collisionHeal);*/
       
       Destroy(gameObject);
 

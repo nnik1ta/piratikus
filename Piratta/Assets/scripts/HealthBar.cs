@@ -20,7 +20,7 @@ public class HealthBar : MonoBehaviour
     }
 
     
-    void Update()
+    /*void Update()
     {
         boba = boo.health;
         Bar.fillAmount = fill;
@@ -36,7 +36,7 @@ public class HealthBar : MonoBehaviour
         else
         {
             bloood.color = new Color(0.5f, 0.5f, 0.5f, 0f);
-        }
+        }*/
 
         /*if (boo.health <= 0.5f)
         {
@@ -55,4 +55,4 @@ public class HealthBar : MonoBehaviour
              bloood.color = new Color(0.5f, 0.5f, 0.5f, 0f);
          }*/
     }
-}
+

@@ -16606,6 +16606,10 @@ PrefabInstance:
       propertyPath: Death
       value: 
       objectReference: {fileID: 1118350008}
+    - target: {fileID: 6640431970705621875, guid: 325d643e6624c84459c85c0c3015e239, type: 3}
+      propertyPath: startingHeath
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6640431970705621876, guid: 325d643e6624c84459c85c0c3015e239, type: 3}
       propertyPath: m_audioClip
       value: 
@@ -16757,6 +16761,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9223368745307612499, guid: 18358cbdf6606014aba401f179aefbf6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9223368745935588219, guid: 18358cbdf6606014aba401f179aefbf6, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
