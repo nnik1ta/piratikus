@@ -74,10 +74,8 @@ GameObject:
   - component: {fileID: 9223368745935588223}
   - component: {fileID: 9223368745935588220}
   - component: {fileID: 9223368745935588221}
-  - component: {fileID: 9223368745935588218}
   - component: {fileID: 9223368745935588219}
   - component: {fileID: 9223368745935588216}
-  - component: {fileID: 9223368745935588217}
   m_Layer: 11
   m_Name: star
   m_TagString: enemy
@@ -169,27 +167,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!50 &9223368745935588218
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9223368745935588214}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 100
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 3
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &9223368745935588219
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -232,20 +209,6 @@ MonoBehaviour:
   pos2: {fileID: 9223368746754274177}
   speed: 2.5
   startPos: {fileID: 9223368746754274177}
---- !u!114 &9223368745935588217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9223368745935588214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 523ea6c6199560044a6edceb395682d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionDamage: 10
-  collisionTag: Player
 --- !u!1 &9223368746754273918
 GameObject:
   m_ObjectHideFlags: 0

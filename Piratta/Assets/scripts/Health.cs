@@ -20,8 +20,9 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
-        _damage = 10;
+        
         currenthealth = Mathf.Clamp(currenthealth - _damage, 0, startingHeath);
+        /*currenthealth -= _damage;*/
         if (currenthealth > 0)
         {
             
@@ -30,6 +31,7 @@ public class Health : MonoBehaviour
         {
 
         }
+        StartCoroutine(Invunerability());
     }
     private IEnumerator Invunerability()
     {
@@ -46,8 +48,5 @@ public class Health : MonoBehaviour
         Physics2D.IgnoreLayerCollision(10, 11, false);
         bob = false;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-    }
+    
 }
