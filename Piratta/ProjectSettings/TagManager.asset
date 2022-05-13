@@ -11,6 +11,8 @@ TagManager:
   - enemy
   - checkpoint
   - weapon
+  - Teleport
+  - bunny_potion
   layers:
   - Default
   - TransparentFX

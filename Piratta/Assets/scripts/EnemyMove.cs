@@ -20,12 +20,12 @@ public class EnemyMove : MonoBehaviour
         if (transform.position == pos1.position)
         {
             nextPos = pos2.position;
-            transform.localScale = new Vector2(1, 1);
+            transform.localScale = new Vector2(1.5f, 1.5f);
         }
         if (transform.position == pos2.position)
         {
             nextPos = pos1.position;
-            transform.localScale = new Vector2(-1, 1);
+            transform.localScale = new Vector2(-1.5f, 1.5f);
         }
        
     }

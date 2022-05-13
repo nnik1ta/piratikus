@@ -9,19 +9,33 @@ public class weaponHold : MonoBehaviour
     RaycastHit2D hit;
     public Transform holdPoint;
     public float throwObject = 3f;
+    public float _horizontalM;
+    public float SY;
+   
+   
     void Start()
     {
         
     }
     void Update()
     {
+        SY = transform.rotation.y;
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (!hold)
             {
 
                 Physics2D.queriesStartInColliders = false;
-                hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance);
+                if (SY == 0 || SY > 0)
+                {
+                    hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance);
+                }
+                else if (SY == -1)
+                {
+                    hit = Physics2D.Raycast(transform.position, Vector2.left * transform.localScale.x, distance);
+                }
+                /*hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance);*/
                 if (hit.collider != null && hit.collider.tag == "weapon") 
                 {
                     hold = true;
@@ -58,13 +72,30 @@ public class weaponHold : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * transform.localScale.normalized.x * distance);
+        
+        if (SY == 0 || SY > 0)
+        {
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.right * transform.localScale.normalized.x * distance);
+        }
+        else if (SY == -1)
+        {
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.left * transform.localScale.normalized.x * distance);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "enemy" && gameObject.name == "Sword")
+       
+        if (collision.gameObject.tag == "DeadZone")
         {
+            Destroy(gameObject);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }

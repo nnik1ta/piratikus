@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
     private int seconds = 2;
     private bool beba;
     private Vector3 respawnPoint;
+    public bool bun;
+    
     
 
 
@@ -41,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         respawnPoint = transform.position;
-       
+        bun = false;
        
     }
     
@@ -109,14 +111,14 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsJump", false);
         }
-        if (beba == true)
+        /*if (beba == true)
         {
             jumpForce = 0f;
         }
         else if (beba == false)
         {
             jumpForce = 25f;
-        }
+        }*/
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -124,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Death.Play();
             transform.position = respawnPoint;
+            SceneManager.LoadScene("GameOver");
         }
 
         if (collision.gameObject.name == "NextLevel")
@@ -137,12 +140,12 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.tag == "enemy")
         {
-            animator.SetBool("IsHit", true);
-            /*StartCoroutine(Invunerability());*/
+          /*  animator.SetBool("IsHit", true);*/
+           
         }  
         else
         {
-            animator.SetBool("IsHit", false);
+            /*animator.SetBool("IsHit", false);*/
         }
         /*if (collision.gameObject.tag == "enemy")
         {
@@ -188,13 +191,24 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
 
         }
+        if (collision.gameObject.tag == "Flag")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        if (collision.gameObject.tag == "bunny_potion")
+        {
+            
+            Destroy(collision.gameObject);
+            StartCoroutine(Bunny());
+        }
+
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "lestnica")
+        /*if (collision.gameObject.tag == "lestnica")
         {
             animator.SetBool("IsClimb", false);
-        }
+        }*/
         if (collision.gameObject.tag == "ground")
         {
             IsCeiling = false;
@@ -204,10 +218,10 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "lestnica")
+       /* if (collision.gameObject.tag == "lestnica")
         {
             animator.SetBool("IsClimb", true);
-        }
+        }*/
     }
     private IEnumerator Invunerability()
     {
@@ -216,6 +230,14 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(1);
         GetComponent<Rigidbody2D>().gravityScale = 4;
         beba = false;
+    }
+    private IEnumerator Bunny()
+    {
+        bun = true;
+        GetComponent<PlayerMovement>().jumpForce = 35;
+        yield return new WaitForSeconds(10);
+        GetComponent<PlayerMovement>().jumpForce = 25;
+        bun = false;
     }
 
 }
