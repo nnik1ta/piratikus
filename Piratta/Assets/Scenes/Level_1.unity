@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 180465244}
   - component: {fileID: 180465243}
   m_Layer: 0
-  m_Name: 01
+  m_Name: Bunny_Potion
   m_TagString: bunny_potion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -490,8 +490,9 @@ GameObject:
   - component: {fileID: 417635474}
   - component: {fileID: 417635473}
   - component: {fileID: 417635472}
+  - component: {fileID: 417635476}
   m_Layer: 0
-  m_Name: Flag 01
+  m_Name: Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -607,6 +608,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &417635476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417635471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e60ad64c5f2d0946972f4c9b77fe8f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &491577049
 GameObject:
   m_ObjectHideFlags: 0
@@ -28368,11 +28381,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4758236696613614853, guid: 56c507e483eafbf49ae699ccd76a39f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 78.03
+      value: -3.2
       objectReference: {fileID: 0}
     - target: {fileID: 4758236696613614853, guid: 56c507e483eafbf49ae699ccd76a39f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.21
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 4758236696613614853, guid: 56c507e483eafbf49ae699ccd76a39f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37895,11 +37908,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6347441399957420462, guid: 53d9dca45d3a44549885ec4cf290ed1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 78.03
+      value: -3.2
       objectReference: {fileID: 0}
     - target: {fileID: 6347441399957420462, guid: 53d9dca45d3a44549885ec4cf290ed1a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.21
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 6347441399957420462, guid: 53d9dca45d3a44549885ec4cf290ed1a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -38016,11 +38029,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6640431970705621881, guid: 325d643e6624c84459c85c0c3015e239, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 78.03
+      value: -3.2
       objectReference: {fileID: 0}
     - target: {fileID: 6640431970705621881, guid: 325d643e6624c84459c85c0c3015e239, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.21
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 6640431970705621881, guid: 325d643e6624c84459c85c0c3015e239, type: 3}
       propertyPath: m_LocalPosition.z

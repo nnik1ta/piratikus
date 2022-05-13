@@ -191,10 +191,7 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
 
         }
-        if (collision.gameObject.tag == "Flag")
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
+        
         if (collision.gameObject.tag == "bunny_potion")
         {
             
