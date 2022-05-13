@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public bool FacingRight = true;
     public float jumpForce = 8f;
     [Header("Player Movement Settings")]
-    [Range(0, 10f)] public float runSpeed = 1f;
+    [Range(0, 10f)] public float runSpeed = 0.5f;
     [Space]
     [Header("Ground Check Settings")]
     public bool isGround = false;
