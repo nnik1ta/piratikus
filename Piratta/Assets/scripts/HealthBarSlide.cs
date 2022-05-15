@@ -10,6 +10,5 @@ public class HealthBarSlide : MonoBehaviour
     public void Update()
     {
         slider.value = opa.currenthealth; 
-    }
-    
+    }   
 }

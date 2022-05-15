@@ -27,43 +27,34 @@ public class PlayerMovement : MonoBehaviour
     public Canvas vih;
     public bool IsCeiling;
     public bool IsCrouch;
-    private int seconds = 2;
     private bool beba;
     private Vector3 respawnPoint;
     public bool bun;
-    
-    
-
-
-
-
-
+    public bool IsRunning;
     public float horizontalMove = 0f;
+    public GameObject potionEffect;
+    public Transform potionEffectPos;
+   
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         respawnPoint = transform.position;
-        bun = false;
-       
+        bun = false; 
     }
-    
     public void flip()
     {
         FacingRight = !FacingRight;
         transform.Rotate(0f,180f,0f);   
-    }
-    
+    } 
     void Update()
 
     {
         horizontalMove = Input.GetAxis("Horizontal") * runSpeed;
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
         if (isGround && Input.GetKeyDown(KeyCode.Space))
-        {
-            
+        {  
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            Jumping.Play();
-            
+            Jumping.Play();      
         }
         if (horizontalMove < 0 && FacingRight)
         {
@@ -102,15 +93,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             animator.SetBool("IsJump", true);
-        }
-        if (!isGround)
-        {
-            animator.SetBool("IsJump", true);
-        }
-        else
-        {
-            animator.SetBool("IsJump", false);
-        }
+        } 
         /*if (beba == true)
         {
             jumpForce = 0f;
@@ -119,6 +102,26 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpForce = 25f;
         }*/
+        if (horizontalMove > 0.1)
+        {
+            IsRunning = true;
+        }
+        else if (horizontalMove < -0.1)
+        {
+            IsRunning = true;
+        }
+        else
+        {
+            IsRunning = false;
+        }
+        if (isGround == false)
+        {
+            animator.SetBool("IsJump", true);
+        }
+        else if (isGround == true)
+        {
+            animator.SetBool("IsJump", false);
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -128,7 +131,6 @@ public class PlayerMovement : MonoBehaviour
             transform.position = respawnPoint;
             SceneManager.LoadScene("GameOver");
         }
-
         if (collision.gameObject.name == "NextLevel")
         {
             SceneManager.LoadScene("Level2");
@@ -136,12 +138,10 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "cherry")
         {
             Eat.Play();
-
         }
         if (collision.gameObject.tag == "enemy")
         {
-          /*  animator.SetBool("IsHit", true);*/
-           
+          /*  animator.SetBool("IsHit", true);*/   
         }  
         else
         {
@@ -157,8 +157,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 targetVelocity = new Vector2(horizontalMove * 10f, rb.velocity.y);
         rb.velocity = targetVelocity;
-        CheckGround();
-        
+        CheckGround();   
     }
     private void CheckGround()
     {
@@ -184,21 +183,20 @@ public class PlayerMovement : MonoBehaviour
         {
             IsCeiling = true;
         }
-
         if (collision.gameObject.tag == "checkpoint")
         {
             respawnPoint = transform.position;
             Destroy(collision.gameObject);
-
         }
-        
         if (collision.gameObject.tag == "bunny_potion")
-        {
-            
+        {  
             Destroy(collision.gameObject);
             StartCoroutine(Bunny());
         }
-
+        if (collision.gameObject.tag == "healP" || collision.gameObject.tag == "bunny_potion")
+        {
+            StartCoroutine(Potion());
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -209,12 +207,10 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "ground")
         {
             IsCeiling = false;
-        }
-       
+        }  
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-
        /* if (collision.gameObject.tag == "lestnica")
         {
             animator.SetBool("IsClimb", true);
@@ -233,8 +229,13 @@ public class PlayerMovement : MonoBehaviour
         bun = true;
         GetComponent<PlayerMovement>().jumpForce = 35;
         yield return new WaitForSeconds(10);
-        GetComponent<PlayerMovement>().jumpForce = 25;
+        GetComponent<PlayerMovement>().jumpForce = 27;
         bun = false;
     }
-
+    private IEnumerator Potion()
+    {
+        Instantiate(potionEffect, potionEffectPos.transform.position, transform.rotation);
+        yield return new WaitForSeconds(0.5f);
+ 
+    }
 }

@@ -11,21 +11,13 @@ public class weaponHold : MonoBehaviour
     public float throwObject = 3f;
     public float _horizontalM;
     public float SY;
-   
-   
-    void Start()
-    {
-        
-    }
     void Update()
     {
         SY = transform.rotation.y;
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (!hold)
             {
-
                 Physics2D.queriesStartInColliders = false;
                 if (SY == 0 || SY > 0)
                 {
@@ -39,8 +31,7 @@ public class weaponHold : MonoBehaviour
                 if (hit.collider != null && hit.collider.tag == "weapon") 
                 {
                     hold = true;
-                }
-               
+                } 
             }
             else
             {
@@ -82,10 +73,8 @@ public class weaponHold : MonoBehaviour
             Gizmos.DrawLine(transform.position, transform.position + Vector3.left * transform.localScale.normalized.x * distance);
         }
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       
         if (collision.gameObject.tag == "DeadZone")
         {
             Destroy(gameObject);
@@ -95,7 +84,6 @@ public class weaponHold : MonoBehaviour
     {
         if (collision.gameObject.tag == "enemy")
         {
-
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }

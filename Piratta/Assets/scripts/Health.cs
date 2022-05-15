@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour
-{   
-    
+{
+   
     public float startingHeath;
     public AudioSource Death;
     [SerializeField] private float iFramesDuration;
@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
     public bool Hit;
     public Animator animator;
     public float currenthealth; /*{ get; private set; }*/
+    
     public void Awake()
     {
         currenthealth = startingHeath;
@@ -25,9 +26,13 @@ public class Health : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void TakeDamage(float _damage)
+    public void TakeHeal(float _damage)
     {
-        
+        currenthealth += _damage;
+       
+    }
+    public void TakeDamage(float _damage)
+    {   
         currenthealth -= _damage;
         StartCoroutine(Invunerability());
     }
@@ -41,7 +46,6 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
             spriteRend.color = Color.white;
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
-
         }
         Physics2D.IgnoreLayerCollision(10, 11, false);
         Hit = false;

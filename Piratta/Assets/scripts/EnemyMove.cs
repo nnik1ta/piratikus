@@ -8,12 +8,10 @@ public class EnemyMove : MonoBehaviour
     public float speed = 1;
     public Transform startPos;
     Vector3 nextPos;
-
     void Start()
     {
         nextPos = startPos.position;
     }
-
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
@@ -27,13 +25,5 @@ public class EnemyMove : MonoBehaviour
             nextPos = pos1.position;
             transform.localScale = new Vector2(-1.5f, 1.5f);
         }
-       
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
-
-
-
 }

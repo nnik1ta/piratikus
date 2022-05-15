@@ -6,17 +6,10 @@ public class bullet : MonoBehaviour
 {
     private float speed = 20f;
     Rigidbody2D rb;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
        rb.velocity = transform.right * speed;
-    }
-
- 
-    void Update()
-    {
-
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -30,5 +23,4 @@ public class bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }
