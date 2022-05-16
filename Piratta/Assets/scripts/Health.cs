@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
     }
     private void Update()
     {
-        if (currenthealth <= 0)
+        if (currenthealth <= 0 && gameObject.tag != "box")
         {
             Destroy(gameObject);
         }
