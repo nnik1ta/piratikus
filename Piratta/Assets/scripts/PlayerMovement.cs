@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public SpriteRenderer spriteRend;
     private Rigidbody2D rb;
     public Animator animator;
     public bool FacingRight = true;
@@ -193,10 +194,20 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
             StartCoroutine(Bunny());
         }
-        if (collision.gameObject.tag == "healP" || collision.gameObject.tag == "bunny_potion")
+      /*  if (collision.gameObject.tag == "healP" || collision.gameObject.tag == "bunny_potion")
         {
             StartCoroutine(Potion());
+        }*/
+        if (collision.gameObject.tag == "healP")
+        {
+            
         }
+        if (collision.gameObject.tag == "bunny_potion")
+        {
+            StartCoroutine(PotionB());
+            
+        }
+
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -216,14 +227,14 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsClimb", true);
         }*/
     }
-    private IEnumerator Invunerability()
+    /*private IEnumerator Invunerability()
     {
         beba = true;
         GetComponent<Rigidbody2D>().gravityScale = 0;
         yield return new WaitForSeconds(1);
         GetComponent<Rigidbody2D>().gravityScale = 4;
         beba = false;
-    }
+    }*/
     private IEnumerator Bunny()
     {
         bun = true;
@@ -232,10 +243,20 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<PlayerMovement>().jumpForce = 27;
         bun = false;
     }
-    private IEnumerator Potion()
+    private IEnumerator PotionB()
     {
         Instantiate(potionEffect, potionEffectPos.transform.position, transform.rotation);
-        yield return new WaitForSeconds(0.5f);
- 
+        spriteRend.color = new Color(0.2f, 1, 0.8f, 1);
+        yield return new WaitForSeconds(6);
+        for (int i = 0; i < 4; i++)
+        {
+            spriteRend.color = new Color(0.2f, 1, 0.8f, 0.5f);
+            yield return new WaitForSeconds(0.5f);
+            spriteRend.color = new Color(0.2f, 1, 0.8f, 1);
+            yield return new WaitForSeconds(0.5f);
+
+        }
+        spriteRend.color = Color.white;
+
     }
 }
